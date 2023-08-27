@@ -1,0 +1,36 @@
+link to image: https://imgur.com/Vdwfl5q
+
+
+For every additional element, why you are adding it:
+Nginx (on App Servers): Nginx is used as a reverse proxy and web server to handle incoming HTTP requests. It provides load balancing capabilities on each application server, distributing traffic among various worker processes. Additionally, Nginx can serve static content more efficiently than the application server itself.
+Primary-Replica Database Cluster: A Primary-Replica (Master-Slave) database cluster is implemented for high availability and fault tolerance. The primary role handles write operations, while the replicas asynchronously replicate data from the primary node to handle read traffic and provide redundancy.
+
+What distribution algorithm your load balancer is configured with and how it works:
+The load balancer (HAProxy) is configured with a Round Robin distribution algorithm. In this algorithm, each incoming request is distributed sequentially to the next server in line. Round Robin is simple and evenly distributes traffic across all available servers. However, it doesn't take server load or health into account, which could lead to uneven distribution under varying loads.
+
+Is your load-balancer enabling an Active-Active or Active-Passive setup, explain the difference between both:
+Active-Active Setup: In an Active-Active setup, all servers are actively handling traffic simultaneously. This approach provides better load distribution and can handle higher traffic loads. However, managing data consistency across multiple active instances can be more complex.
+Active-Passive Setup: In an Active-Passive setup, only one server (active node) handles traffic, while the others (passive nodes) remain on standby. The active node carries the load, and if it fails, one of the passive nodes takes over. This setup simplifies data consistency but might underutilize resources.
+
+How a database Primary-Replica (Master-Slave) cluster works:
+In a Primary-Replica database cluster:
+Primary Node: This is the main database node responsible for handling write operations (insert, update, delete). It's the authoritative source of data.
+Replica Node: Replica nodes (also known as slave nodes) replicate data from the primary node. They are used to handle read queries, offloading read traffic from the primary node. Replication can be asynchronous, meaning there might be a slight delay between data changes on the primary and their appearance on the replica.
+
+What is the difference between the Primary node and the Replica node in regard to the application:
+Primary Node: The primary node handles all write operations, ensuring data consistency and integrity. It's responsible for receiving updates from the application and replicating those changes to the replicas. The application communicates with the primary node for data modifications.
+Replica Node: Replica nodes are used for read-heavy operations. The application can direct read queries to the replica nodes, reducing the load on the primary node. However, it's important to note that replicas might not always have the most up-to-date data due to asynchronous replication delays. They provide scalability and high availability for read operations while maintaining data redundancy.
+
+
+** Issues with this Infrastructure:
+
+Where are SPOF:
+Load Balancer SPOF: With a single load balancer, if it fails, all incoming traffic will be disrupted. This undermines the high availability goal of the setup. A redundant load balancer should be implemented for failover.
+Database SPOF: The primary database server is a single point of failure. If it goes down, both the application and replicas would be affected. A solution like a database cluster or failover mechanism should be in place to prevent this.
+
+Security issues (no firewall, no HTTPS):
+Lack of Firewalls: Not having proper firewalls leaves the servers exposed to potential attacks from the internet. Security groups or firewall rules are essential to restrict incoming and outgoing traffic based on known patterns and protocols.
+No HTTPS: Without HTTPS, data transmission between users and the website is not encrypted, exposing sensitive information to interception. SSL/TLS certificates should be implemented to provide secure communication over HTTPS.
+
+No Monitoring:
+Absence of Monitoring: Without monitoring, it's difficult to detect performance issues, downtime, or potential security breaches. Monitoring tools are necessary to track server health, resource utilization, and uptime.

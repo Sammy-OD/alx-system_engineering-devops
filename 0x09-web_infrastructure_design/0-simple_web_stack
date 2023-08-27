@@ -1,0 +1,35 @@
+link to image: https://imgur.com/DycBjti
+
+
+What is a Server:
+A server is a computer system that hosts and delivers your website's content and data to users over the internet. It responds to requests from users' browsers and serves as the central point for managing your website's functionality.
+
+What is the role of the Domain Name:
+A domain name is a human-readable address used to identify a website or a specific location on the internet. It provides an easy-to-remember name that corresponds to an IP address. It helps users access websites without needing to remember complex numerical IP addresses.
+
+What type of DNS Record "www" in www.foobar.com:
+The DNS record type for the "www" subdomain in "www.foobar.com" is an "A" record (Address record). This "A" record maps the "www" subdomain to the IP address (8.8.8.8) of your server, ensuring that users who type "www.foobar.com" are directed to the correct server.
+
+What is the role of the Web Server:
+The web server, Nginx in this case, handles incoming HTTP requests from users' browsers. It serves static files like HTML, CSS, and images directly to users. It can also forward dynamic requests to the application server, which processes these requests and generates dynamic content.
+
+What is the role of the Application Server:
+The application server processes dynamic requests that require data manipulation or complex calculations. In this scenario, it interacts with the MySQL database to retrieve and manage data. It generates the dynamic content of your website, which is then sent to the web server for delivery to users.
+
+What is the role of the Database:
+The MySQL database stores and manages data needed by your website. It holds information like user accounts, content, settings, and more. The application server communicates with the database to fetch and store data as required by the user's requests.
+
+What is the server using to communicate with the computer of the user requesting the website:
+The server communicates with the user's computer using the HTTP protocol. When a user enters "www.foobar.com" in their browser, their browser sends an HTTP request to the server. The server processes this request, interacts with the database if necessary, and sends an HTTP response containing the webpage's content back to the user's browser.
+
+
+** Issues with this Infrastructure:
+
+Single Point of Failure (SPOF):
+The single server setup poses a risk of a single point of failure. If the server hardware fails, experiences a network issue, or crashes, the entire website becomes inaccessible. This vulnerability can lead to prolonged downtime and a negative user experience.
+
+Downtime During Maintenance:
+Since both the web server and application server reside on the same server, any maintenance or updates that require restarting these services will result in downtime. During this downtime, the website will be inaccessible to users, which can impact user satisfaction and potentially harm business goals.
+
+Inability to Scale with Traffic:
+The current infrastructure lacks scalability. If there's a sudden surge in incoming traffic, the server might struggle to handle the load. Scaling horizontally by adding more servers to distribute the load is not possible in this setup, making it challenging to accommodate increased traffic.

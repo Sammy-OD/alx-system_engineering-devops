@@ -1,0 +1,16 @@
+link to image: https://imgur.com/wfCxM73
+
+
+For every additional element, why you are adding it:
+
+Load Balancer (HAProxy):
+By using a load balancer, you can achieve high availability, scalability, and better performance. If one server fails, the load balancer can route traffic to healthy servers, minimizing downtime.
+
+Web Server:
+Separating static content handling from dynamic content processing reduces the load on the application server and improves overall performance. Reverse proxying allows for better control over request routing and enables features like SSL termination.
+
+Application Server:
+Isolating the application logic from other components makes it easier to scale the application horizontally, as multiple application server instances can be added behind the load balancer. It also allows for focused monitoring and tuning of the application environment.
+
+Database Server:
+Centralizing data management in a separate server ensures data integrity, security, and efficient querying. By dedicating a server to the database, you can optimize its configuration for data storage and retrieval tasks.
