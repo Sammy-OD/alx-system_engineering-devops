@@ -2,14 +2,14 @@
 
 ## Issue Summary:
 
-# Duration:
+### Duration:
 **Start Time:** October 15, 2023, 10:45 AM (UTC-4)
 **End Time:** October 15, 2023, 2:30 PM (UTC-4)
 
-# Impact:
+### Impact:
 The outage affected the availability of our primary web service, resulting in a 30% degradation in user experience. Users reported slow page loading times, intermittent errors, and in some cases, complete unavailability of the service during the incident.
 
-# Root Cause:
+### Root Cause:
 The root cause of the outage was identified as a misconfigured update in the load balancer settings, leading to uneven distribution of traffic and overloading specific servers.
 
 ## Timeline:
@@ -30,15 +30,15 @@ The root cause of the outage was identified as a misconfigured update in the loa
 
 ## Root Cause and Resolution:
 
-# Root Cause:
+### Root Cause:
 The misconfiguration in the load balancer settings led to a disproportionate distribution of traffic across servers. Some servers were overwhelmed, resulting in increased response times and errors for users.
 
-# Resolution:
+### Resolution:
 The issue was resolved by rolling back the load balancer configurations to the previous known good state. Further, adjustments were made to distribute traffic more evenly, and additional monitoring was implemented to quickly detect and prevent such misconfigurations in the future.
 
 ## Corrective and Preventative Measures:
 
-# Improvements/Fixes:
+### Improvements/Fixes:
 
 **Enhanced Monitoring:** Implement more robust monitoring for load balancer configurations and traffic distribution patterns.
 Automated Testing: Introduce automated tests for load balancer configurations as part of the deployment pipeline.
